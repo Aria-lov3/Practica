@@ -1,5 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/tab/burger_tab.dart';
+import 'package:flutter_application_1/tab/donut_tab.dart';
+import 'package:flutter_application_1/tab/pancake_tab.dart';
+import 'package:flutter_application_1/tab/pizza_tab.dart';
+import 'package:flutter_application_1/tab/smoothie_tab.dart';
 import 'package:flutter_application_1/utils/my_tab.dart';
 
 class HomePage extends StatefulWidget {
@@ -63,6 +68,11 @@ class _HomePageState extends State<HomePage> {
         ),
         //2. Pestañas (TabBar)
          TabBar(tabs: myTabs),
+         Expanded(child:TabBarView(
+          children:[DonutTab(),BurguerTab(),
+                  SmoothieTab(),
+                  PancakeTab(),
+                  PizzaTab(),]))
         ]
       ),
     ),
