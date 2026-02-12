@@ -1,7 +1,9 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/utils/donut_tile.dart';
 
 class DonutTab extends StatelessWidget {
-  DonutTab({super.key});
+   DonutTab({super.key});
 
   //List of donuts
   final List donutOnSale = [
@@ -36,17 +38,20 @@ class DonutTab extends StatelessWidget {
       //Se encarga de acomodar elementos dentro del grid
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
       //Cantidad de columnas
-      crossAxisCount: 2),
+      crossAxisCount: 2,
+      childAspectRatio: 1/1.6),
       //Cantidad de elementos
       itemCount: donutOnSale.length,
       //Lo que se va a construir
-      itemBuilder: DonutTile(
-      donutFlavor: donutOnSale[index][0],
-      donutPrice: donutOnSale[index][1],
-      donutColor: donutOnSale[index][2],
-      donutImagePath: donutOnSale[index][3],
-      donutProvider: donutOnSale[index][4],
-    ),
+      itemBuilder: (context, index) {
+      return DonutTile(
+        donutFlavor: donutOnSale[index][0],
+        donutPrice: donutOnSale[index][1],
+        donutColor: donutOnSale[index][2],
+        donutImagePath: donutOnSale[index][3],
+        donutProvider: donutOnSale[index][4],
+        );
+      },
     );
   }
 }
