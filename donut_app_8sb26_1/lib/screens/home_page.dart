@@ -15,7 +15,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
- List<Widget> myTabs = [
+  late TabController _tabController;
+  List<Widget> myTabs = [
     //donut tab
     const MyTab(iconPath: 'lib/icons/donut.png', iconName: 'Donut'),
     //burger tab
@@ -33,49 +34,97 @@ class _HomePageState extends State<HomePage> {
     return DefaultTabController(
       length: myTabs.length,
       child: Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        // Icono de la izquierda
-        leading: Icon(Icons.menu, color: Colors.grey[800]),
-        // Iconos de la derecha
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 24.0),
-            child: Icon(Icons.person, color: Colors.grey[800]),
-          ),
-        ],
-      ),
-      body: Column(
-        //1. Texo principal
-        children: [Padding(
-          padding: const EdgeInsets.only(left: 24.0),
-          child: Row(
-            children: [
-              Text('I want to ', style: TextStyle(fontSize: 24)),
-              Text(
-                'Eat',
-               style: TextStyle(
-                //Tamaño de la letra
-                fontSize: 24,
-                //Negritas
-                fontWeight: FontWeight.bold,
-                //Subrayado
-                decoration: TextDecoration.underline,
-                )
-              ),
-            ],
-          ),
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          // Icono de la izquierda
+          leading: Icon(Icons.menu, color: Colors.grey[800]),
+          // Iconos de la derecha
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 24.0),
+              child: Icon(Icons.person, color: Colors.grey[800]),
+            ),
+          ],
         ),
-        //2. Pestañas (TabBar)
-         TabBar(tabs: myTabs),
-         Expanded(child:TabBarView(
-          children:[DonutTab(),BurguerTab(),
+        body: Column(
+          //1. Texo principal
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 24.0),
+              child: Row(
+                children: [
+                  Text('I want to ', style: TextStyle(fontSize: 24)),
+                  Text(
+                    'Eat',
+                    style: TextStyle(
+                      //Tamaño de la letra
+                      fontSize: 24,
+                      //Negritas
+                      fontWeight: FontWeight.bold,
+                      //Subrayado
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            //2. Pestañas (TabBar)
+            TabBar(tabs: myTabs),
+
+            Expanded(
+              child: TabBarView(
+                //controller: _tabController,
+                children: [
+                  DonutTab(),
+                  BurguerTab(),
                   SmoothieTab(),
                   PancakeTab(),
-                  PizzaTab(),]))
-        ]
+                  PizzaTab(),
+                ],
+              ),
+            ),
+
+            Container(
+              color: Colors.white,
+              padding: EdgeInsets.all(16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(padding: EdgeInsets.only(left: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                  Text('2 Items | \$45', style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  )
+                  ),
+
+                  Text('Delivery Charges Included',
+                  style:TextStyle(fontSize: 12)
+                        ),
+                      ],
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Text(
+                      'View Cart',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.pink[200],
+                    ),
+                  ), 
+                ],
+              )
+            )
+          ],
+        ),
       ),
-    ),
     );
   }
 }
