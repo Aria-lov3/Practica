@@ -2,54 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utils/donut_tile.dart';
 
 class DonutTab extends StatelessWidget {
-   DonutTab({super.key});
+  final void Function(String name, double price) addItemToCart;
 
-  //List of donuts
+  DonutTab({super.key, required this.addItemToCart});
+
   final List donutOnSale = [
-    // donutFlavor, donutPrice, donutColor, donutImagePath, donutProvider
-    [
-      'Chocolate',
-      '100',
-      Colors.brown,
-      "lib/images/chocolate_donut.png",
-      'Starbucks',
-    ],
-    [
-      'Strawberry',
-      '89',
-      Colors.red,
-      "lib/images/strawberry_donut.png",
-      'Krispy Kreme',
-    ],
-    [
-      'Ice Cream',
-      '95',
-      Colors.blue,
-      "lib/images/icecream_donut.png",
-      "Dunkin' Donuts",
-    ],
+    ['Chocolate', '100', Colors.brown, "lib/images/chocolate_donut.png", 'Starbucks'],
+    ['Strawberry', '89', Colors.red, "lib/images/strawberry_donut.png", 'Krispy Kreme'],
+    ['Ice Cream', '95', Colors.blue, "lib/images/icecream_donut.png", "Dunkin' Donuts"],
     ['Grape', '70', Colors.purple, "lib/images/grape_donut.png", 'Oxxo'],
   ];
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      //Se encarga de acomodar elementos dentro del grid
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      //Cantidad de columnas
-      crossAxisCount: 2,
-      //relacion de aspecto
-      childAspectRatio: 1/1.6),
-      //Cantidad de elementos
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 1 / 1.6,
+      ),
       itemCount: donutOnSale.length,
-      //Lo que se va a construir
       itemBuilder: (context, index) {
-      return DonutTile(
-        donutFlavor: donutOnSale[index][0],
-        donutPrice: donutOnSale[index][1],
-        donutColor: donutOnSale[index][2],
-        donutImagePath: donutOnSale[index][3],
-        donutProvider: donutOnSale[index][4],
+        return DonutTile(
+          donutFlavor: donutOnSale[index][0],
+          donutPrice: donutOnSale[index][1],
+          donutColor: donutOnSale[index][2],
+          donutImagePath: donutOnSale[index][3],
+          donutProvider: donutOnSale[index][4],
+          addItemToCart: addItemToCart,
         );
       },
     );
